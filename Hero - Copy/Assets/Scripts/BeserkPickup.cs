@@ -6,6 +6,7 @@ public class BeserkPickup : MonoBehaviour
 {
     public bool isBeserk = false;
     private float targetTime = 15.0f;
+    /*private float targetTime = 15.0f;*/
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.name == "Player")

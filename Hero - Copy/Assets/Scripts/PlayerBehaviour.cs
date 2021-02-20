@@ -10,6 +10,8 @@ public class PlayerBehaviour : MonoBehaviour
     public float distanceToGround = 0.1f;
     public LayerMask groundLayer;
 
+    private GameBehavior _gameManager;
+
     public GameObject bullet;
     public float bulletSpeed = 100f;
 
@@ -17,12 +19,23 @@ public class PlayerBehaviour : MonoBehaviour
     private float hInput;
     private CapsuleCollider _col;
     private Rigidbody _rb;
+    //setup input flags
+    private bool space = false;
 
     // Start is called before the first frame update
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
         _col = GetComponent<CapsuleCollider>();
+
+        _gameManager = GameObject.Find("GameManager").GetComponent<GameBehavior>();
+    }
+    void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.name == "Enemy")
+        {
+            _gameManager.HP -= 5;
+        }
     }
 
     // Update is called once per frame
@@ -30,15 +43,23 @@ public class PlayerBehaviour : MonoBehaviour
     {
         vInput = Input.GetAxis("Vertical") * moveSpeed;
         hInput = Input.GetAxis("Horizontal") * rotateSpeed;
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            space = true;
+        }
+        else
+        {
+            space = false;
+        }
         /*
         this.transform.Translate(Vector3.forward * vInput * Time.deltaTime);
         this.transform.Rotate(Vector3.up * hInput * Time.deltaTime);
         */
-    }
 
+    }
     void FixedUpdate()
     {
-        if (IsGrounded() && Input.GetKeyDown(KeyCode.Space))
+        if (IsGrounded() && space)
         {
             _rb.AddForce(Vector3.up * jumpVelocity, ForceMode.Impulse);
         }

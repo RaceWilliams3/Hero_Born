@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraBehavior : MonoBehaviour
 {
-    public Vector3 camOffset = new Vector3(0f, 0.8f, -3.6f);
+    public Vector3 camOffset = new Vector3(0f, 1.5f, -3.6f);
 
     private Transform target;
     // Start is called before the first frame update
