@@ -11,7 +11,7 @@ public class EnemyBehavior : MonoBehaviour
     public Transform player;
     private int _lives = 3;
     private int locationIndex = 0;
-    private UnityEngine.AI.NavMeshAgent agent;
+    private NavMeshAgent agent;
     public int EnemyLives
     {
         get { return _lives; }

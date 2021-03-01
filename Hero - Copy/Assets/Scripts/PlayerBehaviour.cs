@@ -14,6 +14,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     public GameObject bullet;
     public float bulletSpeed = 100f;
+    public int ammo;
 
     private float vInput;
     private float hInput;
@@ -27,6 +28,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
         _col = GetComponent<CapsuleCollider>();
+        ammo = 20;
 
         _gameManager = GameObject.Find("GameManager").GetComponent<GameBehavior>();
     }
@@ -79,10 +81,10 @@ public class PlayerBehaviour : MonoBehaviour
 
         _rb.MoveRotation(_rb.rotation * angleRot);
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && ammo > 0) 
         {
             GameObject newBullet = Instantiate(bullet, this.transform.position + new Vector3(1, 0, 0), this.transform.rotation) as GameObject;
-
+            ammo += -1;
             Rigidbody bulletRB = newBullet.GetComponent<Rigidbody>();
             bulletRB.velocity = this.transform.forward * bulletSpeed;
         }
