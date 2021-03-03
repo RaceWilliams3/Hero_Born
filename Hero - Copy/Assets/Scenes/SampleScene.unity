@@ -807,6 +807,24 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!1 &233319377 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6472490240535448396, guid: a98b28e1df279cf4bb9796bc9677597b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1283026332}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &233319383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 233319377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e78db2e12224c1141a8d63ac41473961, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &253349866
 GameObject:
   m_ObjectHideFlags: 0
@@ -1358,6 +1376,7 @@ MonoBehaviour:
     m_Bits: 256
   bullet: {fileID: 4736466719816919298, guid: 5b73e99f08475d3489acb2056f1040e9, type: 3}
   bulletSpeed: 100
+  ammo: 0
 --- !u!1 &389742580
 GameObject:
   m_ObjectHideFlags: 0
@@ -1489,6 +1508,7 @@ MonoBehaviour:
   maxItems: 4
   showWinScreen: 0
   showLossScreen: 0
+  _PB: {fileID: 0}
 --- !u!4 &493379913
 Transform:
   m_ObjectHideFlags: 0

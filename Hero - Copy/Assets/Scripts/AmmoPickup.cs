@@ -10,6 +10,8 @@ public class AmmoPickup : MonoBehaviour
         {
             Destroy(this.transform.parent.gameObject);
             Debug.Log("Ammo Gained!");
+            PlayerBehaviour _PB = collision.gameObject.GetComponent<PlayerBehaviour>();
+            _PB.ammo += 10;
         }
 
     }

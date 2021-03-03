@@ -10,6 +10,7 @@ public class GameBehavior : MonoBehaviour
     public bool showWinScreen = false;
     public bool showLossScreen = false;
     private int _itemsCollected = 0;
+    public PlayerBehaviour _PB;
     public int Items
     {    
         get { return _itemsCollected; }
@@ -53,13 +54,13 @@ public class GameBehavior : MonoBehaviour
     void Start()
     {
         GameObject Player = GameObject.Find("Player");
-        PlayerBehaviour PlayerBehaviour = Player.GetComponent<PlayerBehaviour>();
+        _PB = Player.GetComponent<PlayerBehaviour>();
     }
     void OnGUI()
     {
         GUI.Box(new Rect(20, 20, 150, 25), "Player Health:" + _playerHP);
         GUI.Box(new Rect(20, 50, 150, 25), "Items Collected:" + _itemsCollected);
-        GUI.Box(new Rect(20, 80, 150, 25), "Ammo:" + PlayerBehaviour.ammo);
+        GUI.Box(new Rect(20, 80, 150, 25), "Ammo:" + _PB.ammo);
         GUI.Label(new Rect(Screen.width / 2 - 100, Screen.height - 50, 300, 50), labelText);
 
         if (showWinScreen)
