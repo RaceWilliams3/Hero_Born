@@ -38,6 +38,7 @@ public class PlayerBehaviour : MonoBehaviour
         {
             _gameManager.HP -= 5;
         }
+
     }
 
     // Update is called once per frame
