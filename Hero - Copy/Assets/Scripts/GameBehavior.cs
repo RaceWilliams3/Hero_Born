@@ -11,6 +11,10 @@ public class GameBehavior : MonoBehaviour
     public bool showLossScreen = false;
     private int _itemsCollected = 0;
     public PlayerBehaviour _PB;
+    public BeserkPickup _BSK;
+    private bool isBeserk;
+    private float targetTime = 15.0f;
+    private string status;
     public int Items
     {    
         get { return _itemsCollected; }
@@ -51,17 +55,62 @@ public class GameBehavior : MonoBehaviour
             }
         }
     }
+    void BeserkToString()
+    {
+        if (isBeserk == true)
+        {
+            status = "true";
+        }
+        else
+        {
+            status = "false";
+        }
+    }
     void Start()
     {
         GameObject Player = GameObject.Find("Player");
         _PB = Player.GetComponent<PlayerBehaviour>();
+        GameObject Beserk = GameObject.Find("B_Collide");
+        _BSK = Beserk.GetComponent<BeserkPickup>();
     }
+    void timerEnded()
+    {
+        Debug.Log("Beserk Mode ended");
+        targetTime = 15.0f;
+        isBeserk = false;
+        Debug.Log(isBeserk);
+    }
+    void Update()
+    {
+        isBeserk = _BSK.isBeserk;
+        if (isBeserk)
+        {
+            targetTime -= Time.deltaTime;
+            if (targetTime <= 0.0f)
+            {
+                timerEnded();
+                targetTime = 15.0f;
+                
+            }
+        }
+    }
+    
     void OnGUI()
     {
         GUI.Box(new Rect(20, 20, 150, 25), "Player Health:" + _playerHP);
         GUI.Box(new Rect(20, 50, 150, 25), "Items Collected:" + _itemsCollected);
         GUI.Box(new Rect(20, 80, 150, 25), "Ammo:" + _PB.ammo);
         GUI.Label(new Rect(Screen.width / 2 - 100, Screen.height - 50, 300, 50), labelText);
+        BeserkToString();
+        if (isBeserk)
+        {
+            GUI.Box(new Rect(Screen.width / 2 - 125, Screen.height / 2+75, 225, 75), status);
+            GUI.Box(new Rect(Screen.width / 2 - 125, Screen.height / 2, 225, 25), "BESERK MODE ACTIVATED!!");
+        }
+        else
+        {
+            GUI.Box(new Rect(Screen.width / 2 - 125, Screen.height / 2, 225, 25), "berserk mode not activated");
+        }
 
         if (showWinScreen)
         { 

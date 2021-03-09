@@ -5,7 +5,6 @@ using UnityEngine;
 public class BeserkPickup : MonoBehaviour
 {
     public bool isBeserk = false;
-    private float targetTime = 15.0f;
     /*private float targetTime = 15.0f;*/
     void OnCollisionEnter(Collision collision)
     {
@@ -14,14 +13,14 @@ public class BeserkPickup : MonoBehaviour
             if (isBeserk == false)
             {
                 isBeserk = true;
-                /*Destroy(this.transform.parent.gameObject);*/
+                Destroy(this.transform.parent.gameObject);
                 Debug.Log("Beserk Mode Activated!");
             }
             
         }
 
     }
-    void Update()
+    /*void Update()
     {
         if (isBeserk)
         {
@@ -43,5 +42,5 @@ public class BeserkPickup : MonoBehaviour
     {
         targetTime = 15.0f;
         isBeserk = false;
-    }
+    }*/
 }

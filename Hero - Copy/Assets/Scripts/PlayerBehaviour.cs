@@ -6,7 +6,7 @@ public class PlayerBehaviour : MonoBehaviour
 {
     public float moveSpeed = 10f;
     public float rotateSpeed = 75f;
-    public float jumpVelocity = 5f;
+    public float jumpVelocity = 10f;
     public float distanceToGround = 0.1f;
     public LayerMask groundLayer;
 
@@ -22,6 +22,15 @@ public class PlayerBehaviour : MonoBehaviour
     private Rigidbody _rb;
     //setup input flags
     private bool space = false;
+    private bool shoot = false;
+
+    bool IsGrounded()
+    {
+        Vector3 capsuleBottom = new Vector3(_col.bounds.center.x, _col.bounds.min.y, _col.bounds.center.z);
+        bool grounded = Physics.CheckCapsule(_col.bounds.center, capsuleBottom, distanceToGround, groundLayer, QueryTriggerInteraction.Ignore);
+
+        return grounded;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -46,13 +55,13 @@ public class PlayerBehaviour : MonoBehaviour
     {
         vInput = Input.GetAxis("Vertical") * moveSpeed;
         hInput = Input.GetAxis("Horizontal") * rotateSpeed;
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (IsGrounded() && Input.GetKeyDown(KeyCode.Space))
         {
             space = true;
         }
-        else
+        if (Input.GetMouseButtonDown(0))
         {
-            space = false;
+            shoot = true;
         }
         /*
         this.transform.Translate(Vector3.forward * vInput * Time.deltaTime);
@@ -62,17 +71,12 @@ public class PlayerBehaviour : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if (IsGrounded() && space)
+        if (space)
         {
             _rb.AddForce(Vector3.up * jumpVelocity, ForceMode.Impulse);
+            space = false;
         }
-        bool IsGrounded()
-        {
-            Vector3 capsuleBottom = new Vector3(_col.bounds.center.x, _col.bounds.min.y, _col.bounds.center.z);
-            bool grounded = Physics.CheckCapsule(_col.bounds.center, capsuleBottom, distanceToGround, groundLayer, QueryTriggerInteraction.Ignore);
-
-            return grounded;
-        }
+        
 
         Vector3 rotation = Vector3.up * hInput;
 
@@ -82,12 +86,13 @@ public class PlayerBehaviour : MonoBehaviour
 
         _rb.MoveRotation(_rb.rotation * angleRot);
 
-        if (Input.GetMouseButtonDown(0) && ammo > 0) 
+        if (shoot && ammo > 0) 
         {
-            GameObject newBullet = Instantiate(bullet, this.transform.position + new Vector3(1, 0, 0), this.transform.rotation) as GameObject;
-            ammo += -1;
+            GameObject newBullet = Instantiate(bullet, this.transform.position + this.transform.right, this.transform.rotation) as GameObject;
             Rigidbody bulletRB = newBullet.GetComponent<Rigidbody>();
             bulletRB.velocity = this.transform.forward * bulletSpeed;
+            shoot = false;
+            ammo += -1;
         }
 
     }
