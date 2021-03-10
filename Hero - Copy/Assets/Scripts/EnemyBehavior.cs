@@ -7,6 +7,7 @@ public class EnemyBehavior : MonoBehaviour
 {
     public Transform patrolRoute;
     public List<Transform> locations;
+    public GameBehavior _GB;
 
     public Transform player;
     private int _lives = 3;
@@ -29,6 +30,9 @@ public class EnemyBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameObject GameManager = GameObject.Find("GameManager");
+        _GB = GameManager.GetComponent<GameBehavior>();
+
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         InitializePatrolRoute();
         MoveToNextPatrolLocation();
@@ -80,8 +84,16 @@ public class EnemyBehavior : MonoBehaviour
     {
         if (collision.gameObject.name == "Bullet(Clone)")
         {
-            EnemyLives -= 1;
-            Debug.Log("Critical Hit!");
+            if(_GB.isBeserk == true)
+            {
+                EnemyLives -= 10;
+                Debug.Log("Critical Hit!");
+            }
+            else
+            {
+                EnemyLives -= 1;
+            }
+            
         }
     }
 }

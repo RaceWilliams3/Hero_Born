@@ -12,8 +12,8 @@ public class GameBehavior : MonoBehaviour
     private int _itemsCollected = 0;
     public PlayerBehaviour _PB;
     public BeserkPickup _BSK;
-    private bool isBeserk;
-    private float targetTime = 15.0f;
+    public bool isBeserk;
+    private float targetTime = 8.0f;
     public int Items
     {    
         get { return _itemsCollected; }
@@ -64,7 +64,7 @@ public class GameBehavior : MonoBehaviour
     void timerEnded()
     {
         Debug.Log("Beserk Mode ended");
-        targetTime = 15.0f;
+        targetTime = 8.0f;
         _BSK.isBeserk = false;
         Debug.Log(isBeserk);
     }
@@ -81,7 +81,7 @@ public class GameBehavior : MonoBehaviour
                 _PB.moveSpeed = 10;
                 _PB.jumpVelocity = 10;
                 timerEnded();
-                targetTime = 15.0f;
+                targetTime = 8.0f;
                 
             }
         }
