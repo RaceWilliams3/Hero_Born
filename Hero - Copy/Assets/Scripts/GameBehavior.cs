@@ -96,10 +96,6 @@ public class GameBehavior : MonoBehaviour
         {
             GUI.Box(new Rect(Screen.width / 2 - 125, Screen.height / 2, 225, 25), "BESERK MODE ACTIVATED!!");
         }
-        else
-        {
-            GUI.Box(new Rect(Screen.width / 2 - 125, Screen.height / 2, 225, 25), "berserk mode not activated");
-        }
 
         if (showWinScreen)
         { 
