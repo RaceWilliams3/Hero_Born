@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2710434563868395536}
   - component: {fileID: 2710434563868395537}
   - component: {fileID: 2710434563868395538}
-  - component: {fileID: 2710434563868395539}
+  - component: {fileID: 5897245897952202762}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -112,7 +112,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &2710434563868395539
+--- !u!114 &5897245897952202762
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -125,4 +125,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  rotateSpeed: 100
+  rotateSpeed: 150
+  jumpVelocity: 5
+  distanceToGround: 0.1
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  bullet: {fileID: 4736466719816919298, guid: 5b73e99f08475d3489acb2056f1040e9, type: 3}
+  bulletSpeed: 50
+  ammo: 0

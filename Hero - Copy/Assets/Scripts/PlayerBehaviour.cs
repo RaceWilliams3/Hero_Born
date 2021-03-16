@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerBehaviour : MonoBehaviour
 {
     public float moveSpeed = 10f;
-    public float rotateSpeed = 75f;
+    public float rotateSpeed = 150f;
     public float jumpVelocity = 10f;
     public float distanceToGround = 0.1f;
     public LayerMask groundLayer;
