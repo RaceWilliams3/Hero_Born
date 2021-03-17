@@ -54,7 +54,7 @@ public class PlayerBehaviour : MonoBehaviour
     void Update()
     {
         vInput = Input.GetAxis("Vertical") * moveSpeed;
-        hInput = Input.GetAxis("Horizontal") * rotateSpeed;
+        hInput = Input.GetAxis("Horizontal") * moveSpeed;
         if (IsGrounded() && Input.GetKeyDown(KeyCode.Space))
         {
             space = true;
@@ -63,10 +63,9 @@ public class PlayerBehaviour : MonoBehaviour
         {
             shoot = true;
         }
-        /*
-        this.transform.Translate(Vector3.forward * vInput * Time.deltaTime);
-        this.transform.Rotate(Vector3.up * hInput * Time.deltaTime);
-        */
+        float mouseInput = Input.GetAxis("Mouse X");
+        Vector3 lookhere = new Vector3(0, mouseInput, 0);
+        transform.Rotate(lookhere);
 
     }
     void FixedUpdate()
@@ -84,7 +83,7 @@ public class PlayerBehaviour : MonoBehaviour
 
         _rb.MovePosition(this.transform.position + this.transform.forward * vInput * Time.fixedDeltaTime);
 
-        _rb.MoveRotation(_rb.rotation * angleRot);
+        //_rb.MovePosition(this.transform.position + this.transform.right * hInput * Time.fixedDeltaTime);
 
         if (shoot && ammo > 0) 
         {

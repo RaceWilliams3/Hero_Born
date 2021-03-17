@@ -56,6 +56,7 @@ public class GameBehavior : MonoBehaviour
     }
     void Start()
     {
+        Cursor.visible = false;
         GameObject Player = GameObject.Find("Player");
         _PB = Player.GetComponent<PlayerBehaviour>();
         GameObject Beserk = GameObject.Find("B_Collide");
@@ -98,7 +99,8 @@ public class GameBehavior : MonoBehaviour
         }
 
         if (showWinScreen)
-        { 
+        {
+            Cursor.visible = true;
             if (GUI.Button(new Rect(Screen.width/2 - 100,Screen.height/2 - 50, 200, 100),"YOU WON!"))
             {
                 SceneManager.LoadScene(0);
@@ -107,6 +109,7 @@ public class GameBehavior : MonoBehaviour
         }
         if (showLossScreen)
         {
+            Cursor.visible = true;
             if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 50, 200, 100), "You Lose..."))
             {
                 SceneManager.LoadScene(0);
