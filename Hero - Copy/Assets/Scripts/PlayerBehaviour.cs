@@ -88,7 +88,7 @@ public class PlayerBehaviour : MonoBehaviour
 
         if (shoot && ammo > 0) 
         {
-            GameObject newBullet = Instantiate(bullet, this.transform.position + this.transform.right, this.transform.rotation) as GameObject;
+            GameObject newBullet = Instantiate(bullet, this.transform.position + this.transform.forward, this.transform.rotation) as GameObject;
             Rigidbody bulletRB = newBullet.GetComponent<Rigidbody>();
             bulletRB.velocity = this.transform.forward * bulletSpeed;
             shoot = false;

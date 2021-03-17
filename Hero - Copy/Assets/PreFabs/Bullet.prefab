@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7531095665229500386}
   - component: {fileID: -3978093239187247409}
   - component: {fileID: 3863850937431253863}
+  - component: {fileID: 4365959736530031797}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -106,8 +107,8 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_AngularDrag: 0
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -230,7 +231,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.5615012, b: 0, a: 1}
-  m_Intensity: 10
+  m_Intensity: 2
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -279,3 +280,15 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &4365959736530031797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4736466719816919298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cbc67409191d154292808468c806cc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

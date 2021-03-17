@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraBehavior : MonoBehaviour
 {
-    public Vector3 camOffset = new Vector3(0f, 0f, -0.5f);
+    public Vector3 camOffset = new Vector3(0f, 1f, 0f);
 
     private Transform target;
     // Start is called before the first frame update
@@ -17,6 +17,7 @@ public class CameraBehavior : MonoBehaviour
     void LateUpdate()
     {
         this.transform.position = target.TransformPoint(camOffset);
-        this.transform.LookAt(target);
+        this.transform.eulerAngles = new Vector3(0,target.transform.eulerAngles.y,0);
+        
     }
 }
