@@ -10,6 +10,7 @@ public class PlayerBehaviour : MonoBehaviour
     public float distanceToGround = 0.1f;
     public LayerMask groundLayer;
 
+    public AudioSource reload;
     private GameBehavior _gameManager;
 
     public GameObject bullet;
@@ -24,6 +25,8 @@ public class PlayerBehaviour : MonoBehaviour
     private bool space = false;
     private bool shoot = false;
 
+    
+
     bool IsGrounded()
     {
         Vector3 capsuleBottom = new Vector3(_col.bounds.center.x, _col.bounds.min.y, _col.bounds.center.z);
@@ -33,6 +36,11 @@ public class PlayerBehaviour : MonoBehaviour
     }
 
     // Start is called before the first frame update
+    void PlayShoot()
+    {
+        GetComponent<AudioSource>().Play(0);
+    }
+
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
@@ -46,6 +54,11 @@ public class PlayerBehaviour : MonoBehaviour
         if(collision.gameObject.name == "Enemy")
         {
             _gameManager.HP -= 5;
+        }
+        if (collision.gameObject.name == "Object004")
+        {
+            reload.Play();
+            Debug.Log("Play sound");
         }
 
     }
@@ -63,9 +76,14 @@ public class PlayerBehaviour : MonoBehaviour
         {
             shoot = true;
         }
-        float mouseInput = Input.GetAxis("Mouse X");
-        Vector3 lookhere = new Vector3(0, mouseInput, 0);
-        transform.Rotate(lookhere);
+
+        if (_gameManager.needToFreeze == false)
+        {
+            float mouseInput = Input.GetAxis("Mouse X");
+            Vector3 lookhere = new Vector3(0, mouseInput, 0);
+            transform.Rotate(lookhere);
+        }
+
 
     }
     void FixedUpdate()
@@ -75,21 +93,18 @@ public class PlayerBehaviour : MonoBehaviour
             _rb.AddForce(Vector3.up * jumpVelocity, ForceMode.Impulse);
             space = false;
         }
-        
+            Vector3 rotation = Vector3.up * hInput;
+            Quaternion angleRot = Quaternion.Euler(rotation * Time.fixedDeltaTime);
 
-        Vector3 rotation = Vector3.up * hInput;
-
-        Quaternion angleRot = Quaternion.Euler(rotation * Time.fixedDeltaTime);
-
-        _rb.MovePosition(this.transform.position + this.transform.forward * vInput * Time.fixedDeltaTime);
-
-        //_rb.MovePosition(this.transform.position + this.transform.right * hInput * Time.fixedDeltaTime);
+        _rb.MovePosition(this.transform.position + (this.transform.forward * vInput * Time.fixedDeltaTime)
+            +(this.transform.right * hInput * Time.fixedDeltaTime));
 
         if (shoot && ammo > 0) 
         {
             GameObject newBullet = Instantiate(bullet, this.transform.position + this.transform.forward, this.transform.rotation) as GameObject;
             Rigidbody bulletRB = newBullet.GetComponent<Rigidbody>();
             bulletRB.velocity = this.transform.forward * bulletSpeed;
+            PlayShoot();
             shoot = false;
             ammo += -1;
         }

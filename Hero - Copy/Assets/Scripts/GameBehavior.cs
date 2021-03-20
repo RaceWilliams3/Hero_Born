@@ -9,11 +9,13 @@ public class GameBehavior : MonoBehaviour
     public int maxItems = 4;
     public bool showWinScreen = false;
     public bool showLossScreen = false;
+    public bool showPauseScreen = false;
     private int _itemsCollected = 0;
     public PlayerBehaviour _PB;
     public BeserkPickup _BSK;
     public bool isBeserk;
     private float targetTime = 8.0f;
+    public bool needToFreeze = false;
     public int Items
     {    
         get { return _itemsCollected; }
@@ -25,6 +27,7 @@ public class GameBehavior : MonoBehaviour
             {
                 labelText = "You've found all the items!";
                 showWinScreen = true;
+                needToFreeze = true;
                 Time.timeScale = 0f;
             }
             else
@@ -46,6 +49,7 @@ public class GameBehavior : MonoBehaviour
             {
                 labelText = "You want another life with that?";
                 showLossScreen = true;
+                needToFreeze = true;
                 Time.timeScale = 0;
             }
             else
@@ -86,6 +90,24 @@ public class GameBehavior : MonoBehaviour
                 
             }
         }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (showPauseScreen == false)
+            {
+                needToFreeze = true;
+                Time.timeScale = 0;
+                showPauseScreen = true;
+                Cursor.visible = false;
+            }
+            else
+            {
+                needToFreeze = false;
+                Time.timeScale = 1;
+                showPauseScreen = false;
+                Cursor.visible = false;
+            }
+
+        }
     }
     
     void OnGUI()
@@ -97,7 +119,12 @@ public class GameBehavior : MonoBehaviour
         {
             GUI.Box(new Rect(Screen.width / 2 - 125, Screen.height / 2, 225, 25), "BESERK MODE ACTIVATED!!");
         }
-
+        if (showPauseScreen)
+        {
+            Cursor.visible = true;
+            
+            GUI.Box(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 50, 200, 100), "Paused, Press ESC");
+        }
         if (showWinScreen)
         {
             Cursor.visible = true;

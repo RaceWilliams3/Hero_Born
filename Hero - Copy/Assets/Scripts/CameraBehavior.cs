@@ -17,7 +17,7 @@ public class CameraBehavior : MonoBehaviour
     void LateUpdate()
     {
         this.transform.position = target.TransformPoint(camOffset);
-        this.transform.eulerAngles = new Vector3(10,target.transform.eulerAngles.y,0);
+        this.transform.eulerAngles = new Vector3(5,target.transform.eulerAngles.y,0);
         
     }
 }
