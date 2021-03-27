@@ -91,7 +91,7 @@ public class EnemyBehavior : MonoBehaviour
             }
             else
             {
-                EnemyLives -= 1;
+                EnemyLives -= 5;
             }
             
         }

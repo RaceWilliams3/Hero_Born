@@ -136,12 +136,13 @@ public class GameBehavior : MonoBehaviour
         }
         if (showLossScreen)
         {
-            Cursor.visible = true;
+            SceneManager.LoadScene(2);
+            /*Cursor.visible = true;
             if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 50, 200, 100), "You Lose..."))
             {
                 SceneManager.LoadScene(0);
                 Time.timeScale = 1.0f;
-            }
+            }*/
         }
     }
 }
